@@ -1,46 +1,39 @@
-# Scrapito
+# TaskItto
 
-
+TaskItto enables you to have a queue of tasks that can be executed by multiple runners concurrently, when you want to limit them to a specific number of simultaneous number of tasks.
 
 ### Motivation
 
-As i need data, Scrapito is intended for when you need to extract data from specific urls in a concurrent way with multiple clients working at the same time from different places.
-
-This service allows you to configure a endpoint to get the task, and an endpoint to send the data scraped from the given url.
+The need of manage a network of services that will perform a task, and not be able to find a fitting solution.
 
 ### What is not
 
-Scrapito is not a queue or task manager service, it just does one thing, receive the task from your system (with the required json format), extract the data, and send you back in the specific format. So is in your hands to provide that endpoints with that functionality, and handle when to give or not the task.
+Is not a task executor, this queue holds the tasks, the listeners and what you want to do (if any) after the task finish, and enables you to ask for tasks, and finish them.
 
-You can run as many as you need, in the same system, or in other systems (will be provided as docker also).
+So you still need a service that will get the available task, and notify when is finished. The idea behind is to have an api that gives you the info for the next task to be performed, and you can have n runners asking for what to do constantly. So you only need to drop tasks inside and the tasks will notify when the signal of finish is called.
 
-It will just start a service with an interval, and will ask for tasks meanwhile is not working in a current task.
+This way you can wait for the tasks, or have a notification, for example refreshing the ui.
 
-(wip websockets)
-
-### And if i need also the api?
-
-There is another project between my repositories, with an api for specific pruposes, with it's queue manager and everything needed if you don't want to think too much, you can replace my api logic with your one.
 
 ## Where to start
 
-Easy peasy, just clone the repo and run the commands for install and start it:
+Easy peasy, it is in npm so you can just install it and use it:
 
 ´´´
-pnpm install
-pnpm start
+pnpm install taskitto
 
-yarn install
-yarn start
+yarn add taskitto
+
+
+import TaskItto from 'taskitto'
+
+const taskItto = new TaskItto()
+
+taskItto.addTask(...)
 ´´´
-
-WIP: build/compilation
-WIP: dockerized version
 
 ## Contributions?
 
-If you don't want to wait until I will implement the rest of the things (I'm working in several projects and my time is limited), feel free to make a pull request with any of the missing things:
-- Sockets mode (to allow connect to the endpoints via websockets and listen for tasks)
-- Dockerized version to run in any place
-- Any improvement you want to suggest
+Any improvement you want to suggest is welcome
 
+There is some tests to ensure the functionality but feel free to suggest missing ones.
