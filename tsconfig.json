@@ -13,6 +13,7 @@
     "strictPropertyInitialization": false,
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
+    "declaration": true,
     "paths": {
       "*": ["node_modules/*"]
     }
